@@ -1,0 +1,32 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.4.RELEASE'
+	id 'java'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.oruc'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter'
+	compile 'org.springframework.kafka:spring-kafka:2.2.5.RELEASE'
+	compile 'org.springframework.boot:spring-boot-starter-actuator'
+	compile 'org.springframework.boot:spring-boot-starter-aop'
+	
+	['prometheus'].each { sys ->
+        compile "io.micrometer:micrometer-registry-$sys"
+    }
+    
+    compile('org.springframework.boot:spring-boot-starter-web'){
+        exclude module: 'spring-boot-starter-tomcat'
+    }
+    compile 'org.springframework.boot:spring-boot-starter-jetty'
+	
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}

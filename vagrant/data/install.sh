@@ -8,5 +8,5 @@ add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(
 apt-get update
 apt-get install -y docker-ce docker-ce-cli containerd.io
 
-apt-get install dos2unix
-apt-get install docker-compose
+apt-get install -y dos2unix
+apt-get install -y docker-compose

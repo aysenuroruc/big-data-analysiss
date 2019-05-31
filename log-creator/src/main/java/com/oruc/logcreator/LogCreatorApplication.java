@@ -42,7 +42,7 @@ public class LogCreatorApplication implements CommandLineRunner {
 			double mb = new Integer(sb.toString().getBytes("UTF-8").length) / 1024.00;
 			System.out.println(mb);
 			if (mb > 2) {
-				File file = new File("./logs/raw-" + logfileCounter++ + ".log");
+				File file = new File(System.getenv("RAW_PATH") + "/raw-" + logfileCounter++ + ".log");
 				FileWriter fw = new FileWriter(file);
 				fw.write(sb.toString());
 				fw.flush();

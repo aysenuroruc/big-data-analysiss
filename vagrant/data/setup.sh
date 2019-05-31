@@ -1,28 +1,18 @@
 #!/bin/bash
+dir=$(pwd)
+
 rm -rf /project
 mkdir -p /project
 cd /project
 
-project="big-data-analysis"
-git clone https://github.com/aysenuroruc/$project.git
-dir=$(pwd)
+git clone https://github.com/wurstmeister/kafka-docker.git
+cd kafka-docker
+docker-compose -f docker-compose-single-broker.yml up
+docker $dir
+docker run -d -v /project/raw/:/raw -e RAW_PATH=/raw --name log-creator --memory=256m aysenuroruc/log-creator:0.0.1
+docker run -d -v /project/raw/:/raw -e RAW_PATH=/raw --name log-watcher --memory=256m aysenuroruc/log-watcher:0.0.1
+docker run -d --name log-consumer -p 8080:8080 --memory=256m aysenuroruc/log-consumer:0.0.1
 
-cd $dir/$project/log-creator
-chmod +x gradlew
-./gradlew build -x test
-
-docker build . -t log-creator:0.0.1
-
-cd $dir/$project/log-consumer
-chmod +x gradlew
-./gradlew build -x test
-
-docker build . -t log-consumer:0.0.1
-
-cd $dir/$project/log-watcher
-chmod +x gradlew
-./gradlew build -x test
-
-docker build . -t log-watcher:0.0.1
+docker run -d -p 9090:9090 -v /project/prometheus.yml:/etc/prometheus/prometheus.yml --name prometheus prom/prometheus
 
 cd $dir

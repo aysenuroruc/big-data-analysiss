@@ -1,7 +1,7 @@
 spring:
   kafka:
     bootstrap-servers:
-    - 192.168.3.2:32774
+    - 192.168.3.2:9092
     
     
 management:

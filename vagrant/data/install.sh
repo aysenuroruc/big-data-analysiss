@@ -10,3 +10,4 @@ apt-get install -y docker-ce docker-ce-cli containerd.io
 
 apt-get install -y dos2unix
 apt-get install -y docker-compose
+apt-get install -y openjdk-8-jdk

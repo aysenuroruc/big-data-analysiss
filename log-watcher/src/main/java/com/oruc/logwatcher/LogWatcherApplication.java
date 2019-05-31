@@ -32,7 +32,7 @@ public class LogWatcherApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		Path dir = Paths.get("C:/Users/Feyza/Desktop/log-consumer/src/main/java/com/oruc/logconsumer/logs");
+		Path dir = Paths.get(System.getenv("RAW_PATH"));
 		WatchService watcher = FileSystems.getDefault().newWatchService();
 
 		try {

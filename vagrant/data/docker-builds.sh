@@ -5,7 +5,7 @@ rm -rf /project
 mkdir -p /project
 cd /project
 
-project="big-data-analysis"
+project="big-data-analysiss"
 git clone https://github.com/aysenuroruc/$project.git
 
 cd /project/$project/log-creator
